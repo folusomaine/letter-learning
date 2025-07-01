@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Letter Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            background: linear-gradient(to right, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .category-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .category-btn.active {
+            background: white;
+            color: #ff6b6b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-input-container {
+            margin: 25px auto 15px;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            border: 2px solid #ff8e53;
+        }
+
+        .letter-input-container i {
+            color: #ff6b6b;
+            font-size: 1.6rem;
+            margin-right: 15px;
+        }
+
+        #letter-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 1.3rem;
+            padding: 10px;
+            outline: none;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        #letter-input::placeholder {
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .letter-display {
+            background: linear-gradient(to bottom, #f0f9ff, #e6f7ff);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .letter-display::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ff6b6b, #ff8e53);
+        }
+
+        .letter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .letter {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 7rem;
+            font-weight: bold;
+            margin: 0 auto 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+            color: white;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            user-select: none;
+        }
+
+        .letter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter.clicked {
+            animation: letterClick 0.5s ease;
+        }
+
+        @keyframes letterClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .image-container {
+            width: 280px;
+            height: 220px;
+            margin: 0 auto 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid white;
+        }
+
+        .image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.08);
+        }
+
+        .word-display {
+            margin: 25px 0;
+        }
+
+        .word {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ff6b6b, #ff8e53);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .word-label {
+            font-size: 1.3rem;
+            color: #666;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            color: white;
+            padding: 16px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-prev {
+            background: linear-gradient(to right, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        .btn-next {
+            background: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        .btn-play {
+            background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            padding: 16px 45px;
+        }
+
+        .progress {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.3rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .alphabet-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 35px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .alphabet-btn {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #e9ecef, #dee2e6);
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .alphabet-btn:hover {
+            background: linear-gradient(to bottom, #dee2e6, #ced4da);
+            transform: scale(1.1);
+        }
+
+        .alphabet-btn.active {
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .instruction {
+            background: #fff9c4;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px auto;
+            max-width: 700px;
+            font-size: 1.1rem;
+            color: #5d4037;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #ffc107;
+        }
+
+        .instruction p {
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instruction p i {
+            color: #ff6b6b;
+            font-size: 1.4rem;
+        }
+
+        .instruction ol {
+            text-align: left;
+            padding-left: 25px;
+            margin-top: 15px;
+        }
+
+        .instruction li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            color: #666;
+            font-size: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .letter {
+                width: 140px;
+                height: 140px;
+                font-size: 5.5rem;
+            }
+            
+            .image-container {
+                width: 220px;
+                height: 180px;
+            }
+            
+            .word {
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                flex: 1;
+                min-width: 140px;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .letter-input-container {
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter {
+                width: 120px;
+                height: 120px;
+                font-size: 4.5rem;
+            }
+            
+            .image-container {
+                width: 200px;
+                height: 160px;
+            }
+            
+            .word {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
+            
+            .categories {
+                gap: 8px;
+            }
+            
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .instruction {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Letter Learning</h1>
+            <div class="subtitle">Learn Letters with Visuals & Pronunciation</div>
+            
+            <div class="categories">
+                <button class="category-btn active" data-category="animals">Animals</button>
+                <button class="category-btn" data-category="food">Food/Fruits</button>
+                <button class="category-btn" data-category="places">Places</button>
+                <button class="category-btn" data-category="objects">Objects</button>
+            </div>
+            
+            <div class="letter-input-container">
+                <i class="fas fa-keyboard"></i>
+                <input type="text" id="letter-input" placeholder="Type any letter (A-Z) to begin">
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="instruction">
+                <p><i class="fas fa-info-circle"></i> <strong>How to use this learning tool:</strong></p>
+                <ol>
+                    <li><strong>Select a category</strong> above (Animals, Food, Places, or Objects)</li>
+                    <li><strong>Type any letter</strong> in the input field to see it displayed</li>
+                    <li>Each letter is <strong>automatically pronounced</strong> when typed</li>
+                    <li><strong>Click on the letter or image</strong> to hear the word pronunciation</li>
+                    <li>Use navigation buttons to browse through all letters</li>
+                </ol>
+            </div>
+            
+            <div class="letter-display">
+                <div class="letter-container">
+                    <div class="letter" id="letter">A</div>
+                    <div class="image-container" id="letter-image-container">
+                        <img id="letter-image" src="https://images.unsplash.com/photo-1611880147493-7542bdb0f024?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Letter example">
+                    </div>
+                </div>
+                
+                <div class="word-display">
+                    <div class="word" id="word">Alligator</div>
+                    <div class="word-label">Starts with <span id="current-letter">A</span></div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-prev" id="prev-btn">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                
+                <button class="btn btn-play" id="play-btn">
+                    <i class="fas fa-volume-up"></i> Play Letter
+                </button>
+                
+                <button class="btn btn-next" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            
+            <div class="progress" id="progress">
+                Letter 1 of 26
+            </div>
+            
+            <div class="alphabet-nav" id="alphabet-nav">
+                <!-- Alphabet buttons will be generated by JavaScript -->
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with ❤️ | Educational Tool for Kids | Categories: Animals, Food/Fruits, Places, Objects</p>
+        </footer>
+    </div>
+
+    <script>
+        // Categories data - each category has letters with words and images
+        const categories = {
+            animals: [
+                { letter: 'A', word: 'Alligator', image: 'https://images.unsplash.com/photo-1611880147493-7542bdb0f024?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'B', word: 'Bear', image: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'C', word: 'Cat', image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'D', word: 'Dog', image: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'E', word: 'Elephant', image: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'F', word: 'Fox', image: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'G', word: 'Giraffe', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'H', word: 'Horse', image: 'https://images.unsplash.com/photo-1598798710023-1770cb3be374?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'I', word: 'Iguana', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'J', word: 'Jaguar', image: 'https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'K', word: 'Koala', image: 'https://images.unsplash.com/photo-1582538885592-e70a5d7ab3d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'L', word: 'Lion', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'M', word: 'Monkey', image: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'N', word: 'Narwhal', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'O', word: 'Owl', image: 'https://images.unsplash.com/photo-1609865484927-5c1b5b7d4be7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'P', word: 'Penguin', image: 'https://images.unsplash.com/photo-1581931631950-49e94a89b8dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Q', word: 'Quail', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'R', word: 'Rabbit', image: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'S', word: 'Snake', image: 'https://images.unsplash.com/photo-1556565680-e80b95ffd0c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'T', word: 'Tiger', image: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'U', word: 'Uakari', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'V', word: 'Vulture', image: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'W', word: 'Wolf', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'X', word: 'X-Ray Tetra', image: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Y', word: 'Yak', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Z', word: 'Zebra', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+            ],
+            food: [
+                { letter: 'A', word: 'Apple', image: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'B', word: 'Banana', image: 'https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'C', word: 'Cherry', image: 'https://images.unsplash.com/photo-1528821128474-27a963496463?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'D', word: 'Donut', image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'E', word: 'Egg', image: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'F', word: 'Fig', image: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'G', word: 'Grape', image: 'https://images.unsplash.com/photo-1601001815894-4bb6c81416b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'H', word: 'Honey', image: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'I', word: 'Ice Cream', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'J', word: 'Jam', image: 'https://images.unsplash.com/photo-1602526432604-029a709e131c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'K', word: 'Kiwi', image: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'L', word: 'Lemon', image: 'https://images.unsplash.com/photo-1590502593747-42a996133562?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'M', word: 'Mango', image: 'https://images.unsplash.com/photo-1605027990121-cf7368f21418?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'N', word: 'Noodles', image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'O', word: 'Orange', image: 'https://images.unsplash.com/photo-1547514701-42782101795e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'P', word: 'Pizza', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Q', word: 'Quiche', image: 'https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'R', word: 'Rice', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'S', word: 'Strawberry', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'T', word: 'Tomato', image: 'https://images.unsplash.com/photo-1561136594-7f68413baa99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'U', word: 'Udon', image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'V', word: 'Vanilla', image: 'https://images.unsplash.com/photo-1502741224143-90386d7f8c82?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'W', word: 'Watermelon', image: 'https://images.unsplash.com/photo-1582281298055-e25b84a30b0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'X', word: 'Xigua', image: 'https://images.unsplash.com/photo-1582281298055-e25b84a30b0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Y', word: 'Yam', image: 'https://images.unsplash.com/photo-1601579111069-f0d1c138d2a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Z', word: 'Zucchini', image: 'https://images.unsplash.com/photo-1591382386627-349b692688ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+            ],
+            places: [
+                { letter: 'A', word: 'Amsterdam', image: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'B', word: 'Berlin', image: 'https://images.unsplash.com/photo-1599946347371-68eb71b16afc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'C', word: 'Chicago', image: 'https://images.unsplash.com/photo-1494522359632-8b80be7c6e87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'D', word: 'Denver', image: 'https://images.unsplash.com/photo-1473445730015-841f29a9490b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'E', word: 'Edinburgh', image: 'https://images.unsplash.com/photo-1501919953370-df9e85b8b8f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'F', word: 'Florence', image: 'https://images.unsplash.com/photo-1543429776-2782fc586c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'G', word: 'Geneva', image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'H', word: 'Helsinki', image: 'https://images.unsplash.com/photo-1588591795084-1770cb3be374?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'I', word: 'Istanbul', image: 'https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'J', word: 'Jerusalem', image: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'K', word: 'Kyoto', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'L', word: 'London', image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'M', word: 'Madrid', image: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'N', word: 'New York', image: 'https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'O', word: 'Oslo', image: 'https://images.unsplash.com/photo-1582655299221-2b6bff351df0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'P', word: 'Paris', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Q', word: 'Quebec', image: 'https://images.unsplash.com/photo-1620075267033-09d12ec2b39e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'R', word: 'Rome', image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'S', word: 'Seoul', image: 'https://images.unsplash.com/photo-1565849904461-04a58ad377e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'T', word: 'Tokyo', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'U', word: 'Utrecht', image: 'https://images.unsplash.com/photo-1603383928972-0a1b02cf98e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'V', word: 'Vienna', image: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'W', word: 'Warsaw', image: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'X', word: 'Xian', image: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Y', word: 'York', image: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Z', word: 'Zurich', image: 'https://images.unsplash.com/photo-1582657118090-af35e051b8a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+            ],
+            objects: [
+                { letter: 'A', word: 'Anchor', image: 'https://images.unsplash.com/photo-1593538312308-d4c29d8dc7f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'B', word: 'Ball', image: 'https://images.unsplash.com/photo-1590959651373-a3db0f38a961?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'C', word: 'Clock', image: 'https://images.unsplash.com/photo-1499364615650-ec38552f4f34?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'D', word: 'Door', image: 'https://images.unsplash.com/photo-1593692909680-61b48e7a59b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'E', word: 'Envelope', image: 'https://images.unsplash.com/photo-1584771893210-ea4a9b815c4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'F', word: 'Fan', image: 'https://images.unsplash.com/photo-1584771893210-ea4a9b815c4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'G', word: 'Guitar', image: 'https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'H', word: 'Hammer', image: 'https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'I', word: 'Ice', image: 'https://images.unsplash.com/photo-1612457284380-2f6c4e0a0c9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'J', word: 'Jug', image: 'https://images.unsplash.com/photo-1593538312308-d4c29d8dc7f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'K', word: 'Kite', image: 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'L', word: 'Lamp', image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'M', word: 'Mirror', image: 'https://images.unsplash.com/photo-1593538312308-d4c29d8dc7f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'N', word: 'Notebook', image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'O', word: 'Orange', image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'P', word: 'Pencil', image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Q', word: 'Quilt', image: 'https://images.unsplash.com/photo-1593538312308-d4c29d8dc7f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'R', word: 'Ruler', image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'S', word: 'Shoe', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'T', word: 'Table', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'U', word: 'Umbrella', image: 'https://images.unsplash.com/photo-1520013817300-1f4c1cb245ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'V', word: 'Violin', image: 'https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'W', word: 'Watch', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'X', word: 'Xylophone', image: 'https://images.unsplash.com/photo-1603314585442-ee3b3c16fbcf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Y', word: 'Yarn', image: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'Z', word: 'Zipper', image: 'https://images.unsplash.com/photo-1593538312308-d4c29d8dc7f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+            ]
+        };
+
+        let currentIndex = 0;
+        let currentCategory = 'animals';
+
+        // DOM Elements
+        const letterElement = document.getElementById('letter');
+        const wordElement = document.getElementById('word');
+        const imageElement = document.getElementById('letter-image');
+        const imageContainer = document.getElementById('letter-image-container');
+        const currentLetterElement = document.getElementById('current-letter');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const playBtn = document.getElementById('play-btn');
+        const progressElement = document.getElementById('progress');
+        const alphabetNav = document.getElementById('alphabet-nav');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const letterInput = document.getElementById('letter-input');
+
+        // Initialize the app
+        function initApp() {
+            updateLetterDisplay();
+            createAlphabetNavigation();
+            setupCategoryButtons();
+            setupEventListeners();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Letter input handling (auto-submit)
+            letterInput.addEventListener('input', handleLetterInput);
+            
+            // Letter element click for word pronunciation
+            letterElement.addEventListener('click', playWordSound);
+            
+            // Image container click for word pronunciation
+            imageContainer.addEventListener('click', playWordSound);
+        }
+
+        // Handle letter input automatically
+        function handleLetterInput() {
+            const inputLetter = letterInput.value.trim().toUpperCase();
+            
+            if (!inputLetter) return;
+            
+            // Only consider the last character if multiple are entered
+            const lastChar = inputLetter.charAt(inputLetter.length - 1);
+            
+            // Find the letter in the current category
+            const letterIndex = categories[currentCategory].findIndex(
+                item => item.letter === lastChar
+            );
+            
+            if (letterIndex === -1) {
+                // Reset input if invalid
+                letterInput.value = '';
+                return;
+            }
+            
+            // Update current index and display
+            currentIndex = letterIndex;
+            updateLetterDisplay();
+            
+            // Pronounce the letter
+            playLetterSound();
+            
+            // Clear input after processing
+            letterInput.value = '';
+        }
+
+        // Update the letter display
+        function updateLetterDisplay() {
+            const currentLetter = categories[currentCategory][currentIndex];
+            
+            letterElement.textContent = currentLetter.letter;
+            wordElement.textContent = currentLetter.word;
+            imageElement.src = currentLetter.image;
+            imageElement.alt = `${currentLetter.letter} for ${currentLetter.word}`;
+            currentLetterElement.textContent = currentLetter.letter;
+            
+            // Update progress
+            progressElement.textContent = `Letter ${currentIndex + 1} of ${Object.keys(categories[currentCategory]).length}`;
+            
+            // Update active state in navigation
+            document.querySelectorAll('.alphabet-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Create alphabet navigation buttons
+        function createAlphabetNavigation() {
+            alphabetNav.innerHTML = '';
+            categories[currentCategory].forEach((letter, index) => {
+                const button = document.createElement('div');
+                button.className = 'alphabet-btn';
+                if (index === currentIndex) button.classList.add('active');
+                button.textContent = letter.letter;
+                button.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateLetterDisplay();
+                    playLetterSound();
+                });
+                alphabetNav.appendChild(button);
+            });
+        }
+
+        // Set up category buttons
+        function setupCategoryButtons() {
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Update category
+                    currentCategory = button.dataset.category;
+                    currentIndex = 0;
+                    
+                    // Recreate alphabet navigation
+                    createAlphabetNavigation();
+                    
+                    // Update display
+                    updateLetterDisplay();
+                });
+            });
+        }
+
+        // Play sound for current letter
+        function playLetterSound() {
+            const currentLetter = categories[currentCategory][currentIndex];
+            
+            // Create speech synthesis
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = currentLetter.letter; // Pronounce only the letter
+            speech.rate = 0.8;
+            speech.pitch = 1.2;
+            
+            // Add animation effect
+            playBtn.innerHTML = '<i class="fas fa-volume-up"></i> Playing...';
+            playBtn.disabled = true;
+            
+            // Play the speech
+            speechSynthesis.speak(speech);
+            
+            // Reset button after speech is done
+            speech.onend = () => {
+                playBtn.innerHTML = '<i class="fas fa-volume-up"></i> Play Letter';
+                playBtn.disabled = false;
+            };
+        }
+
+        // Play sound for current word
+        function playWordSound() {
+            const currentLetter = categories[currentCategory][currentIndex];
+            
+            // Create speech synthesis
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = currentLetter.word; // Pronounce the word
+            speech.rate = 0.8;
+            speech.pitch = 1.2;
+            
+            // Add animation effect to letter
+            letterElement.classList.add('clicked');
+            setTimeout(() => {
+                letterElement.classList.remove('clicked');
+            }, 500);
+            
+            // Play the speech
+            speechSynthesis.speak(speech);
+        }
+
+        // Event listeners for navigation
+        prevBtn.addEventListener('click', () => {
+            const length = Object.keys(categories[currentCategory]).length;
+            currentIndex = (currentIndex - 1 + length) % length;
+            updateLetterDisplay();
+            playLetterSound();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            const length = Object.keys(categories[currentCategory]).length;
+            currentIndex = (currentIndex + 1) % length;
+            updateLetterDisplay();
+            playLetterSound();
+        });
+
+        playBtn.addEventListener('click', playLetterSound);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                const length = Object.keys(categories[currentCategory]).length;
+                currentIndex = (currentIndex - 1 + length) % length;
+                updateLetterDisplay();
+                playLetterSound();
+            } else if (e.key === 'ArrowRight') {
+                const length = Object.keys(categories[currentCategory]).length;
+                currentIndex = (currentIndex + 1) % length;
+                updateLetterDisplay();
+                playLetterSound();
+            } else if (e.key === ' ' || e.key === 'Enter') {
+                playLetterSound();
+            }
+        });
+
+        // Initialize the application
+        window.onload = initApp;
+    </script>
+</body>
+</html>
