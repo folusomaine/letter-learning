@@ -104,7 +104,7 @@
 
         .letter-input-container {
             margin: 25px auto 15px;
-            max-width: 500px;
+            max-width: 350px; /* Reduced width */
             background: rgba(255, 255, 255, 0.95);
             border-radius: 50px;
             padding: 12px 25px;
@@ -132,6 +132,7 @@
             font-weight: 600;
             color: #333;
             letter-spacing: 1px;
+            width: 50px; /* Fixed width */
         }
 
         #letter-input::placeholder {
@@ -377,19 +378,51 @@
             color: #5d4037;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             border-left: 5px solid #ffc107;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        .instruction p {
+        .instruction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .instruction-header p {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin: 0;
         }
 
-        .instruction p i {
+        .instruction-header i {
             color: #ff6b6b;
             font-size: 1.4rem;
+        }
+
+        .instruction-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+        }
+
+        .instruction.expanded .instruction-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 20px;
+        }
+
+        .instruction.expanded .instruction-header .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
         }
 
         .instruction ol {
@@ -444,6 +477,7 @@
             
             .letter-input-container {
                 padding: 10px 20px;
+                max-width: 300px;
             }
         }
 
@@ -498,20 +532,25 @@
             
             <div class="letter-input-container">
                 <i class="fas fa-keyboard"></i>
-                <input type="text" id="letter-input" placeholder="Type any letter (A-Z) to begin">
+                <input type="text" id="letter-input" placeholder="Type a letter">
             </div>
         </header>
         
         <div class="content">
             <div class="instruction">
-                <p><i class="fas fa-info-circle"></i> <strong>How to use this learning tool:</strong></p>
-                <ol>
-                    <li><strong>Select a category</strong> above (Animals, Food, Places, or Objects)</li>
-                    <li><strong>Type any letter</strong> in the input field to see it displayed</li>
-                    <li>Each letter is <strong>automatically pronounced</strong> when typed</li>
-                    <li><strong>Click on the letter or image</strong> to hear the word pronunciation</li>
-                    <li>Use navigation buttons to browse through all letters</li>
-                </ol>
+                <div class="instruction-header">
+                    <p><i class="fas fa-info-circle"></i> <strong>How to use this learning tool</strong></p>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="instruction-content">
+                    <ol>
+                        <li><strong>Select a category</strong> above (Animals, Food, Places, or Objects)</li>
+                        <li><strong>Type any letter</strong> in the input field to see it displayed</li>
+                        <li>Each letter is <strong>automatically pronounced</strong> when typed</li>
+                        <li><strong>Click on the letter or image</strong> to hear the word pronunciation</li>
+                        <li>Use navigation buttons to browse through all letters</li>
+                    </ol>
+                </div>
             </div>
             
             <div class="letter-display">
@@ -620,7 +659,7 @@
                 { letter: 'B', word: 'Berlin', image: 'https://images.unsplash.com/photo-1599946347371-68eb71b16afc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
                 { letter: 'C', word: 'Chicago', image: 'https://images.unsplash.com/photo-1494522359632-8b80be7c6e87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
                 { letter: 'D', word: 'Denver', image: 'https://images.unsplash.com/photo-1473445730015-841f29a9490b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
-                { letter: 'E', word: 'Edinburgh', image: 'https://images.unsplash.com/photo-1501919953370-df9e85b8b8f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+                { letter: 'E', word: 'Edinburgh', image: 'https://images.unsplash.com/photo-1501919953370-df9e85b8b8f6?ixlib=rb-4.0.3&auto=format&fit=c crop&w=500&q=80' },
                 { letter: 'F', word: 'Florence', image: 'https://images.unsplash.com/photo-1543429776-2782fc586c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
                 { letter: 'G', word: 'Geneva', image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
                 { letter: 'H', word: 'Helsinki', image: 'https://images.unsplash.com/photo-1588591795084-1770cb3be374?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
@@ -689,6 +728,7 @@
         const alphabetNav = document.getElementById('alphabet-nav');
         const categoryButtons = document.querySelectorAll('.category-btn');
         const letterInput = document.getElementById('letter-input');
+        const instructionElement = document.querySelector('.instruction');
 
         // Initialize the app
         function initApp() {
@@ -696,11 +736,19 @@
             createAlphabetNavigation();
             setupCategoryButtons();
             setupEventListeners();
+            setupCollapsibleInstruction();
+        }
+
+        // Set up collapsible instruction section
+        function setupCollapsibleInstruction() {
+            instructionElement.addEventListener('click', () => {
+                instructionElement.classList.toggle('expanded');
+            });
         }
 
         // Set up event listeners
         function setupEventListeners() {
-            // Letter input handling (auto-submit)
+            // Letter input handling
             letterInput.addEventListener('input', handleLetterInput);
             
             // Letter element click for word pronunciation
@@ -710,14 +758,16 @@
             imageContainer.addEventListener('click', playWordSound);
         }
 
-        // Handle letter input automatically
+        // Handle letter input
         function handleLetterInput() {
-            const inputLetter = letterInput.value.trim().toUpperCase();
+            const inputText = letterInput.value.toUpperCase();
             
-            if (!inputLetter) return;
+            if (inputText.length === 0) {
+                return;
+            }
             
-            // Only consider the last character if multiple are entered
-            const lastChar = inputLetter.charAt(inputLetter.length - 1);
+            // Get the last character entered
+            const lastChar = inputText.charAt(inputText.length - 1);
             
             // Find the letter in the current category
             const letterIndex = categories[currentCategory].findIndex(
@@ -725,8 +775,8 @@
             );
             
             if (letterIndex === -1) {
-                // Reset input if invalid
-                letterInput.value = '';
+                // Remove invalid characters
+                letterInput.value = inputText.slice(0, -1);
                 return;
             }
             
@@ -737,8 +787,8 @@
             // Pronounce the letter
             playLetterSound();
             
-            // Clear input after processing
-            letterInput.value = '';
+            // Keep the valid letter in the input field
+            letterInput.value = lastChar;
         }
 
         // Update the letter display
@@ -794,6 +844,9 @@
                     
                     // Update display
                     updateLetterDisplay();
+                    
+                    // Reset input field
+                    letterInput.value = '';
                 });
             });
         }
