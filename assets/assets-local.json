@@ -1,0 +1,530 @@
+{
+    "animals": [
+        {
+            "letter": "A",
+            "word": "Alligator",
+            "image": "assets/animals/A/alligator.avif"
+        },
+        {
+            "letter": "B",
+            "word": "Bear",
+            "image": "assets/animals/B/bear.avif"
+        },
+        {
+            "letter": "C",
+            "word": "Cat",
+            "image": "assets/animals/C/cat.avif"
+        },
+        {
+            "letter": "D",
+            "word": "Dog",
+            "image": "assets/animals/D/dog.avif"
+        },
+        {
+            "letter": "E",
+            "word": "Elephant",
+            "image": "assets/animals/E/elephant.avif"
+        },
+        {
+            "letter": "F",
+            "word": "Fox",
+            "image": "assets/animals/F/fox.avif"
+        },
+        {
+            "letter": "G",
+            "word": "Giraffe",
+            "image": "assets/animals/G/giraffe.avif"
+        },
+        {
+            "letter": "H",
+            "word": "Horse",
+            "image": "image not found"
+        },
+        {
+            "letter": "I",
+            "word": "Iguana",
+            "image": "assets/animals/I/iguana.avif"
+        },
+        {
+            "letter": "J",
+            "word": "Jaguar",
+            "image": "assets/animals/J/jaguar.avif"
+        },
+        {
+            "letter": "K",
+            "word": "Koala",
+            "image": "assets/animals/K/koala.avif"
+        },
+        {
+            "letter": "L",
+            "word": "Lion",
+            "image": "assets/animals/L/lion.avif"
+        },
+        {
+            "letter": "M",
+            "word": "Monkey",
+            "image": "assets/animals/M/monkey.avif"
+        },
+        {
+            "letter": "N",
+            "word": "Narwhal",
+            "image": "assets/animals/N/narwhal.avif"
+        },
+        {
+            "letter": "O",
+            "word": "Owl",
+            "image": "image not found"
+        },
+        {
+            "letter": "P",
+            "word": "Penguin",
+            "image": "image not found"
+        },
+        {
+            "letter": "Q",
+            "word": "Quail",
+            "image": "assets/animals/Q/quail.avif"
+        },
+        {
+            "letter": "R",
+            "word": "Rabbit",
+            "image": "assets/animals/R/rabbit.avif"
+        },
+        {
+            "letter": "S",
+            "word": "Snake",
+            "image": "image not found"
+        },
+        {
+            "letter": "T",
+            "word": "Tiger",
+            "image": "assets/animals/T/tiger.avif"
+        },
+        {
+            "letter": "U",
+            "word": "Uakari",
+            "image": "assets/animals/U/uakari.avif"
+        },
+        {
+            "letter": "V",
+            "word": "Vulture",
+            "image": "assets/animals/V/vulture.avif"
+        },
+        {
+            "letter": "W",
+            "word": "Wolf",
+            "image": "assets/animals/W/wolf.avif"
+        },
+        {
+            "letter": "X",
+            "word": "X-Ray Tetra",
+            "image": "assets/animals/X/x-ray_tetra.avif"
+        },
+        {
+            "letter": "Y",
+            "word": "Yak",
+            "image": "assets/animals/Y/yak.avif"
+        },
+        {
+            "letter": "Z",
+            "word": "Zebra",
+            "image": "assets/animals/Z/zebra.avif"
+        }
+    ],
+    "food": [
+        {
+            "letter": "A",
+            "word": "Apple",
+            "image": "assets/food/A/apple.avif"
+        },
+        {
+            "letter": "B",
+            "word": "Banana",
+            "image": "assets/food/B/banana.avif"
+        },
+        {
+            "letter": "C",
+            "word": "Cherry",
+            "image": "image not found"
+        },
+        {
+            "letter": "D",
+            "word": "Donut",
+            "image": "assets/food/D/donut.avif"
+        },
+        {
+            "letter": "E",
+            "word": "Egg",
+            "image": "assets/food/E/egg.avif"
+        },
+        {
+            "letter": "F",
+            "word": "Fig",
+            "image": "assets/food/F/fig.avif"
+        },
+        {
+            "letter": "G",
+            "word": "Grape",
+            "image": "image not found"
+        },
+        {
+            "letter": "H",
+            "word": "Honey",
+            "image": "assets/food/H/honey.avif"
+        },
+        {
+            "letter": "I",
+            "word": "Ice Cream",
+            "image": "assets/food/I/ice_cream.avif"
+        },
+        {
+            "letter": "J",
+            "word": "Jam",
+            "image": "assets/food/J/jam.avif"
+        },
+        {
+            "letter": "K",
+            "word": "Kiwi",
+            "image": "assets/food/K/kiwi.avif"
+        },
+        {
+            "letter": "L",
+            "word": "Lemon",
+            "image": "assets/food/L/lemon.avif"
+        },
+        {
+            "letter": "M",
+            "word": "Mango",
+            "image": "image not found"
+        },
+        {
+            "letter": "N",
+            "word": "Noodles",
+            "image": "assets/food/N/noodles.avif"
+        },
+        {
+            "letter": "O",
+            "word": "Orange",
+            "image": "assets/food/O/orange.avif"
+        },
+        {
+            "letter": "P",
+            "word": "Pizza",
+            "image": "assets/food/P/pizza.avif"
+        },
+        {
+            "letter": "Q",
+            "word": "Quiche",
+            "image": "assets/food/Q/quiche.avif"
+        },
+        {
+            "letter": "R",
+            "word": "Rice",
+            "image": "assets/food/R/rice.avif"
+        },
+        {
+            "letter": "S",
+            "word": "Strawberry",
+            "image": "assets/food/S/strawberry.avif"
+        },
+        {
+            "letter": "T",
+            "word": "Tomato",
+            "image": "assets/food/T/tomato.avif"
+        },
+        {
+            "letter": "U",
+            "word": "Udon",
+            "image": "assets/food/U/udon.avif"
+        },
+        {
+            "letter": "V",
+            "word": "Vanilla",
+            "image": "assets/food/V/vanilla.avif"
+        },
+        {
+            "letter": "W",
+            "word": "Watermelon",
+            "image": "assets/food/W/watermelon.avif"
+        },
+        {
+            "letter": "X",
+            "word": "Xigua",
+            "image": "assets/food/X/xigua.avif"
+        },
+        {
+            "letter": "Y",
+            "word": "Yam",
+            "image": "image not found"
+        },
+        {
+            "letter": "Z",
+            "word": "Zucchini",
+            "image": "assets/food/Z/zucchini.avif"
+        }
+    ],
+    "places": [
+        {
+            "letter": "A",
+            "word": "Amsterdam",
+            "image": "assets/places/A/amsterdam.avif"
+        },
+        {
+            "letter": "B",
+            "word": "Berlin",
+            "image": "assets/places/B/berlin.avif"
+        },
+        {
+            "letter": "C",
+            "word": "Chicago",
+            "image": "image not found"
+        },
+        {
+            "letter": "D",
+            "word": "Denver",
+            "image": "assets/places/D/denver.avif"
+        },
+        {
+            "letter": "E",
+            "word": "Edinburgh",
+            "image": "image not found"
+        },
+        {
+            "letter": "F",
+            "word": "Florence",
+            "image": "image not found"
+        },
+        {
+            "letter": "G",
+            "word": "Geneva",
+            "image": "assets/places/G/geneva.avif"
+        },
+        {
+            "letter": "H",
+            "word": "Helsinki",
+            "image": "assets/places/H/helsinki.avif"
+        },
+        {
+            "letter": "I",
+            "word": "Istanbul",
+            "image": "assets/places/I/istanbul.avif"
+        },
+        {
+            "letter": "J",
+            "word": "Jerusalem",
+            "image": "assets/places/J/jerusalem.avif"
+        },
+        {
+            "letter": "K",
+            "word": "Kyoto",
+            "image": "assets/places/K/kyoto.avif"
+        },
+        {
+            "letter": "L",
+            "word": "London",
+            "image": "assets/places/L/london.avif"
+        },
+        {
+            "letter": "M",
+            "word": "Madrid",
+            "image": "assets/places/M/madrid.avif"
+        },
+        {
+            "letter": "N",
+            "word": "New York",
+            "image": "assets/places/N/new_york.avif"
+        },
+        {
+            "letter": "O",
+            "word": "Oslo",
+            "image": "assets/places/O/oslo.avif"
+        },
+        {
+            "letter": "P",
+            "word": "Paris",
+            "image": "assets/places/P/paris.avif"
+        },
+        {
+            "letter": "Q",
+            "word": "Quebec",
+            "image": "image not found"
+        },
+        {
+            "letter": "R",
+            "word": "Rome",
+            "image": "assets/places/R/rome.avif"
+        },
+        {
+            "letter": "S",
+            "word": "Seoul",
+            "image": "assets/places/S/seoul.avif"
+        },
+        {
+            "letter": "T",
+            "word": "Tokyo",
+            "image": "assets/places/T/tokyo.avif"
+        },
+        {
+            "letter": "U",
+            "word": "Utrecht",
+            "image": "image not found"
+        },
+        {
+            "letter": "V",
+            "word": "Vienna",
+            "image": "assets/places/V/vienna.avif"
+        },
+        {
+            "letter": "W",
+            "word": "Warsaw",
+            "image": "assets/places/W/warsaw.avif"
+        },
+        {
+            "letter": "X",
+            "word": "Xian",
+            "image": "assets/places/X/xian.avif"
+        },
+        {
+            "letter": "Y",
+            "word": "York",
+            "image": "assets/places/Y/york.avif"
+        },
+        {
+            "letter": "Z",
+            "word": "Zurich",
+            "image": "image not found"
+        }
+    ],
+    "objects": [
+        {
+            "letter": "A",
+            "word": "Anchor",
+            "image": "assets/objects/A/anchor.avif"
+        },
+        {
+            "letter": "B",
+            "word": "Ball",
+            "image": "assets/objects/B/ball.avif"
+        },
+        {
+            "letter": "C",
+            "word": "Clock",
+            "image": "assets/objects/C/clock.avif"
+        },
+        {
+            "letter": "D",
+            "word": "Door",
+            "image": "image not found"
+        },
+        {
+            "letter": "E",
+            "word": "Envelope",
+            "image": "image not found"
+        },
+        {
+            "letter": "F",
+            "word": "Fan",
+            "image": "image not found"
+        },
+        {
+            "letter": "G",
+            "word": "Guitar",
+            "image": "assets/objects/G/guitar.avif"
+        },
+        {
+            "letter": "H",
+            "word": "Hammer",
+            "image": "assets/objects/H/hammer.avif"
+        },
+        {
+            "letter": "I",
+            "word": "Ice",
+            "image": "image not found"
+        },
+        {
+            "letter": "J",
+            "word": "Jug",
+            "image": "assets/objects/J/jug.avif"
+        },
+        {
+            "letter": "K",
+            "word": "Kite",
+            "image": "assets/objects/K/kite.avif"
+        },
+        {
+            "letter": "L",
+            "word": "Lamp",
+            "image": "assets/objects/L/lamp.avif"
+        },
+        {
+            "letter": "M",
+            "word": "Mirror",
+            "image": "assets/objects/M/mirror.avif"
+        },
+        {
+            "letter": "N",
+            "word": "Notebook",
+            "image": "assets/objects/N/notebook.avif"
+        },
+        {
+            "letter": "O",
+            "word": "Orange",
+            "image": "assets/objects/O/orange.avif"
+        },
+        {
+            "letter": "P",
+            "word": "Pencil",
+            "image": "assets/objects/P/pencil.avif"
+        },
+        {
+            "letter": "Q",
+            "word": "Quilt",
+            "image": "assets/objects/Q/quilt.avif"
+        },
+        {
+            "letter": "R",
+            "word": "Ruler",
+            "image": "assets/objects/R/ruler.avif"
+        },
+        {
+            "letter": "S",
+            "word": "Shoe",
+            "image": "assets/objects/S/shoe.avif"
+        },
+        {
+            "letter": "T",
+            "word": "Table",
+            "image": "assets/objects/T/table.avif"
+        },
+        {
+            "letter": "U",
+            "word": "Umbrella",
+            "image": "assets/objects/U/umbrella.avif"
+        },
+        {
+            "letter": "V",
+            "word": "Violin",
+            "image": "assets/objects/V/violin.avif"
+        },
+        {
+            "letter": "W",
+            "word": "Watch",
+            "image": "assets/objects/W/watch.avif"
+        },
+        {
+            "letter": "X",
+            "word": "Xylophone",
+            "image": "assets/objects/X/xylophone.avif"
+        },
+        {
+            "letter": "Y",
+            "word": "Yarn",
+            "image": "assets/objects/Y/yarn.avif"
+        },
+        {
+            "letter": "Z",
+            "word": "Zipper",
+            "image": "assets/objects/Z/zipper.avif"
+        }
+    ]
+}
