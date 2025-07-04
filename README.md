@@ -1,46 +1,54 @@
-# Letter Learning Web App
+# Letter Learning Fun!
 
-A simple, interactive web application designed to help children learn the alphabet. Each letter is associated with a word and an image, organized into categories like animals, food, places, and objects.
+A simple and interactive web application designed to help children learn the alphabet in a playful way. Each letter is associated with a word and an image, organized into categories.
 
-[Watch a Demo on YouTube on generating speech for the words by setting up a Text To Speech server](https://www.youtube.com/watch?v=p55ph0gm3lA)
+## Current Features
 
-## Features
+*   **Interactive Letter Grid**: Click or type a letter to open a detailed learning modal.
+*   **Speech Synthesis**: Utilizes the browser's built-in Web Speech API to pronounce letters and words.
+*   **Dynamic Categories**: Easily switch between different topics. Currently, 'Animals' and 'Food' are enabled.
+*   **Keyboard Navigation**: Navigate with arrow keys, select letters by typing, and close the modal with the 'Escape' key.
+*   **Playful Animations**: Letters in the modal jump playfully when appearing or being navigated.
+*   **Dark Mode**: A sleek dark mode for comfortable viewing in low-light environments.
+*   **Dynamic Content**: All app content is loaded from a local JSON file, making it easy to add or change letters, words, and images.
 
-*   **Interactive Learning**: Click through letters, hear them pronounced, and see corresponding images.
-*   **Multiple Categories**: Switch between animals, food, places, and objects.
-*   **Speech Synthesis**: Hear the pronunciation for both letters and words.
-*   **Keyboard Navigation**: Use arrow keys for easy navigation.
-*   **Dynamic Content**: Asset data is loaded from a local JSON file, making it easy to update and manage.
+## Features Not Yet Available
+
+### Animal Sounds
+
+*   **Status**: The "Animal Sound" button appears in the modal for the 'Animals' category but is currently disabled.
+*   **Dependencies**: This feature requires audio files for each animal. The file paths will need to be added to `assets-local.json` and the playback logic implemented in `script.js`.
+
+### Additional Categories (Places & Objects)
+
+*   **Status**: The data for 'Places' and 'Objects' exists in `assets.json`, but these categories are hidden from the UI to keep the experience focused.
+*   **How to Enable**: To show these categories, you can remove them from the `hiddenCategories` array in `script.js`:
+    ```javascript
+    // located in the createCategoryButtons function in script.js
+    const hiddenCategories = ['places', 'objects']; // Remove items to show them
+    ```
 
 ## Getting Started
 
 ### Prerequisites
 
-*   Python 3 (to run the image downloader script and local server)
-*   The `requests` library for Python (`pip install requests`)
+*   A modern web browser that supports the Web Speech API (e.g., Chrome, Firefox, Edge).
+*   Python 3 (for running the local server and the asset downloader script).
 
-### Asset Setup
+### Local Development
 
-The application uses local images which are downloaded and organized by a Python script.
-
-1.  **Review Assets**: The `assets/assets.json` file contains the list of all words and remote image URLs. You can customize this file.
-2.  **Download Images**: Run the Python script to download the images and create the `assets-local.json` file that the app uses.
+1.  **Set Up Assets**: The application uses local images. The `assets/assets.json` file contains the list of all words and remote image URLs. To download them, run:
     ```sh
     python3 assets/extract-images.py
     ```
-    This will create an `images` directory with all the images and the `assets-local.json` file.
+    This script will create an `images` directory and the `assets-local.json` file that the app uses.
 
-## Local Development
-
-To run the application on your local machine, you need to use a simple web server. This is because modern browsers have security restrictions that prevent web pages from loading local files directly.
-
-1.  **Start the server**:
-    In your terminal, navigate to the project's root directory and run:
+2.  **Start the Local Server**: To run the app, you need a simple web server due to browser security policies.
     ```sh
     python3 -m http.server 8000
     ```
-2.  **Open the app**:
-    Open your web browser and go to [http://localhost:8000](http://localhost:8000).
+
+3.  **Open the App**: Open your browser and navigate to `http://localhost:8000`.
 
 ## Deployment
 

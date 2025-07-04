@@ -45,7 +45,6 @@ body {
 .app-header {
     text-align: center;
     padding: 40px 20px;
-    border-bottom: 3px dashed var(--color-accent);
     margin-bottom: 40px;
 }
 
@@ -91,23 +90,29 @@ body {
     background: white;
     border: 2px solid var(--color-secondary);
     color: var(--color-secondary);
-    padding: 10px 20px;
+    padding: 12px 28px; /* Increased padding */
     border-radius: 50px;
+    font-size: 1.1rem; /* Increased font size */
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-light);
 }
 
 .category-selector button:hover {
     background: var(--color-secondary);
+    border-color: var(--color-secondary);
     color: white;
     transform: translateY(-3px);
+    box-shadow: var(--shadow-strong);
 }
 
 .category-selector button.active {
-    background: var(--color-secondary);
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
     color: white;
     box-shadow: var(--shadow-strong);
+    transform: translateY(-2px);
 }
 
 .info-button, .dark-mode-toggle {
