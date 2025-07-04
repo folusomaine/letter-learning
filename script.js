@@ -9,8 +9,8 @@ const appContainer = document.querySelector('.app-container');
 const categorySelector = document.querySelector('.category-selector');
 const letterGrid = document.getElementById('letter-grid');
 const learningModal = document.getElementById('learning-modal');
-const infoModal = document.getElementById('info-modal');
-const soundToggle = document.querySelector('.sound-toggle');
+
+const animalSoundButton = document.getElementById('animal-sound-btn');
 const darkModeSwitch = document.getElementById('dark-mode-switch');
 
 // --- CORE APPLICATION LOGIC ---
@@ -23,7 +23,7 @@ async function main() {
         const response = await fetch('assets/assets-local.json');
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         allData = await response.json();
-        console.log("Data loaded, inspecting contents:", allData);
+
         console.log("Successfully loaded local assets.");
         initApp();
     } catch (error) {
@@ -52,7 +52,9 @@ function initApp() {
 // --- UI BUILDERS ---
 
 function createCategoryButtons() {
-    const categories = Object.keys(allData);
+    // Define categories to hide. Easy to update in the future.
+    const hiddenCategories = ['places', 'objects'];
+    const categories = Object.keys(allData).filter(c => !hiddenCategories.includes(c));
     const categorySelector = document.querySelector('.category-selector');
     categorySelector.innerHTML = ''; // Clear existing buttons
 
@@ -67,8 +69,7 @@ function createCategoryButtons() {
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             
-            // Show/hide animal sound toggle based on the original (lowercase) category name
-            soundToggle.style.display = category === 'animals' ? 'flex' : 'none';
+            
             createLetterGrid(); // Re-create the letter grid for the new category
         });
         categorySelector.appendChild(button);
@@ -78,7 +79,7 @@ function createCategoryButtons() {
     if (categorySelector.firstElementChild) {
         categorySelector.firstElementChild.classList.add('active');
         currentCategory = categories[0]; // Set initial category
-        soundToggle.style.display = currentCategory === 'animals' ? 'flex' : 'none';
+        
         createLetterGrid(); // Initial grid load
     }
 }
@@ -102,10 +103,19 @@ function handleLetterClick(letter) {
     const itemIndex = categoryData.findIndex(item => item.letter === letter);
 
     if (itemIndex !== -1) {
-        currentIndex = itemIndex;
-        updateAndShowModal();
+        showLearningModal(itemIndex);
     } else {
         alert(`No entry for the letter '${letter}' in the '${currentCategory}' category.`);
+    }
+}
+
+function playAnimalSound() {
+    const item = allData[currentCategory][currentIndex];
+    if (item && item.sound) {
+        const sound = new Audio(item.sound);
+        sound.play().catch(e => console.error("Error playing sound:", e));
+    } else {
+        console.log("No animal sound available for this item.");
     }
 }
 
@@ -121,12 +131,11 @@ function setupEventListeners() {
         }
     });
 
-    // Modal close buttons
+    // Modal close button
     learningModal.querySelector('#close-modal').addEventListener('click', hideLearningModal);
-    infoModal.querySelector('#close-info-modal').addEventListener('click', hideInfoModal);
 
-    // Info button
-    document.getElementById('info-button').addEventListener('click', showInfoModal);
+    // Animal sound button
+    animalSoundButton.addEventListener('click', playAnimalSound);
 
     // Modal navigation
     document.getElementById('modal-prev-btn').addEventListener('click', navigatePrev);
@@ -136,7 +145,6 @@ function setupEventListeners() {
     document.getElementById('modal-speak-btn').addEventListener('click', playSound);
     document.addEventListener('keydown', handleKeyPress);
     learningModal.addEventListener('click', handleModalClick);
-    infoModal.addEventListener('click', handleModalClick);
 }
 
 function handleKeyPress(event) {
@@ -147,8 +155,7 @@ function handleKeyPress(event) {
         if (isLetter) {
             const newIndex = allData[currentCategory].findIndex(item => item.letter === key);
             if (newIndex !== -1) {
-                currentIndex = newIndex;
-                updateAndShowModal();
+                showLearningModal(newIndex);
             }
         } else if (event.key === 'ArrowLeft') {
             navigatePrev();
@@ -166,30 +173,31 @@ function handleKeyPress(event) {
         const currentCategoryData = allData[currentCategory];
         const letterIndex = currentCategoryData.findIndex(item => item.letter === letter);
         if (letterIndex !== -1) {
-            currentIndex = letterIndex;
-            updateAndShowModal();
+            showLearningModal(letterIndex);
         }
     }
 }
 
 function handleModalClick(event) {
-    if (event.target === learningModal || event.target === infoModal) {
+    // Close the modal if the backdrop is clicked
+    if (event.target === learningModal) {
         hideLearningModal();
-        hideInfoModal();
     }
 }
 
-function showInfoModal() {
-    infoModal.classList.add('visible');
-}
 
-function hideInfoModal() {
-    infoModal.classList.remove('visible');
-}
 
 // --- MODAL MANAGEMENT ---
 
 function updateAndShowModal() {
+    // Show/hide animal sound button inside the modal
+    if (currentCategory === 'animals') {
+        animalSoundButton.style.display = 'inline-flex';
+        // The feature is not ready, so the button is disabled.
+        animalSoundButton.disabled = true;
+    } else {
+        animalSoundButton.style.display = 'none';
+    }
     const item = allData[currentCategory][currentIndex];
     
     document.getElementById('modal-letter-display').textContent = item.letter;
@@ -197,8 +205,13 @@ function updateAndShowModal() {
     document.getElementById('modal-image').src = item.image;
     document.getElementById('modal-image').alt = `Image for ${item.word}`;
 
-    learningModal.classList.add('visible');
     playSound();
+}
+
+function showLearningModal(index) {
+    currentIndex = index;
+    updateAndShowModal();
+    learningModal.classList.add('visible');
 }
 
 function hideLearningModal() {

@@ -3,132 +3,158 @@
         {
             "letter": "A",
             "word": "Alligator",
-            "image": "assets/animals/A/alligator.avif"
+            "image": "assets/animals/A/alligator.avif",
+            "sound": "assets/animals/A/sound/alligator.mp3"
         },
         {
             "letter": "B",
             "word": "Bear",
-            "image": "assets/animals/B/bear.avif"
+            "image": "assets/animals/B/bear.avif",
+            "sound": "assets/animals/B/sound/bear.mp3"
         },
         {
             "letter": "C",
             "word": "Cat",
-            "image": "assets/animals/C/cat.avif"
+            "image": "assets/animals/C/cat.avif",
+            "sound": "assets/animals/C/sound/cat.mp3"
         },
         {
             "letter": "D",
             "word": "Dog",
-            "image": "assets/animals/D/dog.avif"
+            "image": "assets/animals/D/dog.avif",
+            "sound": "assets/animals/D/sound/dog.mp3"
         },
         {
             "letter": "E",
             "word": "Elephant",
-            "image": "assets/animals/E/elephant.avif"
+            "image": "assets/animals/E/elephant.avif",
+            "sound": "assets/animals/E/sound/elephant.mp3"
         },
         {
             "letter": "F",
             "word": "Fox",
-            "image": "assets/animals/F/fox.avif"
+            "image": "assets/animals/F/fox.avif",
+            "sound": "assets/animals/F/sound/fox.mp3"
         },
         {
             "letter": "G",
             "word": "Giraffe",
-            "image": "assets/animals/G/giraffe.avif"
+            "image": "assets/animals/G/giraffe.avif",
+            "sound": "assets/animals/G/sound/giraffe.mp3"
         },
         {
             "letter": "H",
             "word": "Horse",
-            "image": "image not found"
+            "image": "image not found",
+            "sound": "assets/animals/H/sound/horse.mp3"
         },
         {
             "letter": "I",
             "word": "Iguana",
-            "image": "assets/animals/I/iguana.avif"
+            "image": "assets/animals/I/iguana.avif",
+            "sound": "assets/animals/I/sound/iguana.mp3"
         },
         {
             "letter": "J",
             "word": "Jaguar",
-            "image": "assets/animals/J/jaguar.avif"
+            "image": "assets/animals/J/jaguar.avif",
+            "sound": "assets/animals/J/sound/jaguar.mp3"
         },
         {
             "letter": "K",
             "word": "Koala",
-            "image": "assets/animals/K/koala.avif"
+            "image": "assets/animals/K/koala.avif",
+            "sound": "assets/animals/K/sound/koala.mp3"
         },
         {
             "letter": "L",
             "word": "Lion",
-            "image": "assets/animals/L/lion.avif"
+            "image": "assets/animals/L/lion.avif",
+            "sound": "assets/animals/L/sound/lion.mp3"
         },
         {
             "letter": "M",
             "word": "Monkey",
-            "image": "assets/animals/M/monkey.avif"
+            "image": "assets/animals/M/monkey.avif",
+            "sound": "assets/animals/M/sound/monkey.mp3"
         },
         {
             "letter": "N",
             "word": "Narwhal",
-            "image": "assets/animals/N/narwhal.avif"
+            "image": "assets/animals/N/narwhal.avif",
+            "sound": "assets/animals/N/sound/narwhal.mp3"
         },
         {
             "letter": "O",
             "word": "Owl",
-            "image": "image not found"
+            "image": "image not found",
+            "sound": "assets/animals/O/sound/owl.mp3"
         },
         {
             "letter": "P",
             "word": "Penguin",
-            "image": "image not found"
+            "image": "image not found",
+            "sound": "assets/animals/P/sound/penguin.mp3"
         },
         {
             "letter": "Q",
             "word": "Quail",
-            "image": "assets/animals/Q/quail.avif"
+            "image": "assets/animals/Q/quail.avif",
+            "sound": "assets/animals/Q/sound/quail.mp3"
         },
         {
             "letter": "R",
             "word": "Rabbit",
-            "image": "assets/animals/R/rabbit.avif"
+            "image": "assets/animals/R/rabbit.avif",
+            "sound": "assets/animals/R/sound/rabbit.mp3"
         },
         {
             "letter": "S",
             "word": "Snake",
-            "image": "image not found"
+            "image": "image not found",
+            "sound": "assets/animals/S/sound/snake.mp3"
         },
         {
             "letter": "T",
             "word": "Tiger",
-            "image": "assets/animals/T/tiger.avif"
+            "image": "assets/animals/T/tiger.avif",
+            "sound": "assets/animals/T/sound/tiger.mp3"
         },
         {
             "letter": "U",
             "word": "Uakari",
-            "image": "assets/animals/U/uakari.avif"
+            "image": "assets/animals/U/uakari.avif",
+            "sound": "assets/animals/U/sound/uakari.mp3"
         },
         {
             "letter": "V",
             "word": "Vulture",
-            "image": "assets/animals/V/vulture.avif"
+            "image": "assets/animals/V/vulture.avif",
+            "sound": "assets/animals/V/sound/vulture.mp3"
         },
         {
             "letter": "W",
             "word": "Wolf",
-            "image": "assets/animals/W/wolf.avif"
+            "image": "assets/animals/W/wolf.avif",
+            "sound": "assets/animals/W/sound/wolf.mp3"
         },
         {
             "letter": "X",
             "word": "X-Ray Tetra",
-            "image": "assets/animals/X/x-ray_tetra.avif"
+            "image": "assets/animals/X/x-ray_tetra.avif",
+            "sound": "assets/animals/X/sound/x-ray_tetra.mp3"
         },
         {
             "letter": "Y",
             "word": "Yak",
-            "image": "assets/animals/Y/yak.avif"
+            "image": "assets/animals/Y/yak.avif",
+            "sound": "assets/animals/Y/sound/yak.mp3"
         },
         {
             "letter": "Z",
             "word": "Zebra",
-            "image": "assets/animals/Z/zebra.avif"
+            "image": "assets/animals/Z/zebra.avif",
+            "sound": "assets/animals/Z/sound/zebra.mp3"
         }
     ],
     "food": [

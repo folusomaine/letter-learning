@@ -13,23 +13,8 @@
         <!-- Header Section -->
         <header class="app-header">
             <h1>Letter Learning Fun!</h1>
-            <p>Type or click a letter to start the adventure!</p>
-            <div class="controls-container">
-                <div class="category-selector">
-                    <!-- Category buttons will be injected here by JS -->
-                </div>
-                <div class="sound-toggle">
-                    <i class="fas fa-music"></i>
-                    <span>Animal Sounds</span>
-                    <label class="switch">
-                        <input type="checkbox" id="animal-sound-toggle" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-                <button id="info-button" class="info-button">
-                    <i class="fas fa-info-circle"></i>
-                    <span>How to Use</span>
-                </button>
+            <p>Type or click a letter to start the adventure</p>
+            <div class="header-actions">
                 <div class="dark-mode-toggle">
                     <i class="fas fa-moon"></i>
                     <label class="switch">
@@ -38,6 +23,12 @@
                     </label>
                     <i class="fas fa-sun"></i>
                 </div>
+            </div>
+            <div class="controls-container">
+                <div class="category-selector">
+                    <!-- Category buttons will be injected here by JS -->
+                </div>
+                
             </div>
         </header>
 
@@ -56,29 +47,20 @@
     <div id="learning-modal" class="modal-container">
         <div class="modal-content">
             <button id="close-modal" class="close-button">&times;</button>
-            <div id="modal-letter-display" class="modal-letter">A</div>
-            <img id="modal-image" src="" alt="Image for word" class="modal-image">
+            <div class="modal-letter-card">
+                <div id="modal-letter-display" class="modal-letter">A</div>
+            </div>
             <p id="modal-word-display" class="modal-word">Apple</p>
+            <img id="modal-image" src="" alt="Image for word" class="modal-image">
+            <button id="animal-sound-btn" class="sound-toggle">
+                <i class="fas fa-paw"></i>
+                <span>Animal Sound</span>
+            </button>
             <div class="modal-navigation">
                 <button id="modal-prev-btn"><i class="fas fa-arrow-left"></i> Prev</button>
                 <button id="modal-speak-btn"><i class="fas fa-volume-up"></i> Speak</button>
                 <button id="modal-next-btn">Next <i class="fas fa-arrow-right"></i></button>
             </div>
-        </div>
-    </div>
-
-    <!-- Info Modal -->
-    <div id="info-modal" class="modal-container">
-        <div class="modal-content">
-            <button id="close-info-modal" class="close-button">&times;</button>
-            <h2>How to Use This App</h2>
-            <ul>
-                <li>Click on any letter in the grid to learn about it.</li>
-                <li>Use the "Prev" and "Next" buttons to navigate through the alphabet.</li>
-                <li>Click the "Speak" button to hear the letter and word pronounced.</li>
-                <li>Use the category buttons to switch between topics like Animals and Food.</li>
-                <li>Toggle the "Animal Sounds" switch to hear fun sounds (coming soon!).</li>
-            </ul>
         </div>
     </div>
 

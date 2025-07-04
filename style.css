@@ -62,7 +62,16 @@ body {
     margin-bottom: 30px;
 }
 
-/* --- CONTROLS (CATEGORIES, TOGGLE, INFO) --- */
+/* --- HEADER ACTIONS (INFO, DARK MODE) --- */
+.header-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* --- CONTROLS (CATEGORIES) --- */
 .controls-container {
     display: flex;
     justify-content: center;
@@ -101,7 +110,7 @@ body {
     box-shadow: var(--shadow-strong);
 }
 
-.sound-toggle, .info-button {
+.info-button, .dark-mode-toggle {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -112,10 +121,7 @@ body {
     font-weight: 600;
 }
 
-.sound-toggle {
-    display: none; /* Hidden by default, shown by JS */
-    color: var(--color-text);
-}
+
 
 
 
@@ -124,6 +130,13 @@ body {
     cursor: pointer;
     color: var(--color-accent);
     transition: all 0.3s ease;
+    padding: 10px;
+    width: 48px; /* Make it circular */
+    height: 48px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-button:hover {
@@ -132,14 +145,21 @@ body {
 }
 
 /* Dark Mode Toggle */
+/* Dark Mode Toggle */
 .dark-mode-toggle {
     display: flex;
     align-items: center;
     gap: 8px;
     background: #fff;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 50px;
     box-shadow: var(--shadow-light);
+    height: 34px; /* Smaller height */
+}
+
+.dark-mode-toggle .fa-sun,
+.dark-mode-toggle .fa-moon {
+    font-size: 0.9rem; /* Smaller icons */
 }
 
 .dark-mode-toggle .fa-sun {
@@ -154,8 +174,8 @@ body {
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 28px;
+    width: 40px; /* Smaller width */
+    height: 22px; /* Smaller height */
 }
 
 .switch input { 
@@ -178,10 +198,10 @@ body {
 .slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
+    height: 16px; /* Smaller handle */
+    width: 16px;  /* Smaller handle */
+    left: 3px;
+    bottom: 3px;
     background-color: white;
     transition: .4s;
 }
@@ -191,7 +211,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(22px);
+    transform: translateX(18px); /* Adjust travel distance */
 }
 
 .slider.round { border-radius: 34px; }
@@ -234,6 +254,20 @@ input:checked + .slider:before {
 .letter-card:nth-child(4n+4):hover { background-color: #ffeaa7; color: #2d3436; } /* Light Yellow */
 
 /* --- MODAL STYLES (LEARNING & INFO) --- */
+@keyframes bounce-in {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .modal-container {
     position: fixed;
     z-index: 1000;
@@ -286,11 +320,21 @@ input:checked + .slider:before {
 .close-button:hover { color: var(--color-primary); }
 
 /* --- LEARNING MODAL SPECIFIC STYLES --- */
+.modal-letter-card {
+    background-color: #f8f9fa;
+    border-radius: 30px;
+    padding: 1rem 2rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    box-shadow: var(--shadow-light);
+    animation: bounce-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 .modal-letter {
     font-family: var(--font-primary);
     font-size: 8rem;
     color: var(--color-primary);
-    margin-bottom: 10px;
+    margin-bottom: 0;
     line-height: 1;
 }
 
@@ -298,11 +342,19 @@ input:checked + .slider:before {
     width: 100%;
     max-width: 300px;
     height: auto;
-    margin: 10px auto;
-    border-radius: 20px;
+    margin: 20px auto;
+    border-radius: 25px;
     object-fit: cover;
     aspect-ratio: 4/3;
     box-shadow: var(--shadow-light);
+    border: 5px solid var(--color-accent);
+    padding: 5px;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+.modal-image:hover {
+    transform: scale(1.03);
 }
 
 .modal-word {
@@ -310,6 +362,40 @@ input:checked + .slider:before {
     font-size: 3rem;
     color: var(--color-secondary);
     margin: 20px 0;
+}
+
+.modal-content .sound-toggle {
+    display: none; /* Hidden by default, shown by JS */
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px auto 0;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-content .sound-toggle:hover {
+    transform: scale(1.05);
+    background: #e67e22; /* Darker shade of secondary */
+}
+
+.modal-content .sound-toggle:disabled {
+    background-color: #e0e0e0;
+    color: #9e9e9e;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.modal-content .sound-toggle:disabled:hover {
+    background-color: #e0e0e0; /* Keep same color on hover */
+    transform: none;
 }
 
 .modal-navigation {
@@ -414,7 +500,16 @@ body.dark-mode .category-selector button.active {
     color: white;
 }
 
-body.dark-mode .sound-toggle,
+body.dark-mode .modal-content .sound-toggle {
+    background: var(--color-primary-dark);
+    color: var(--color-bg-dark);
+}
+
+body.dark-mode .modal-content .sound-toggle:hover {
+    background: #ff6b81; /* Lighter shade of primary-dark */
+}
+
+body.dark-mode 
 body.dark-mode .info-button,
 body.dark-mode .dark-mode-toggle {
     background: var(--color-surface-dark);
