@@ -67,3 +67,9 @@ This is a static site, and you can host it for free on services like GitHub Page
 2.  **Install the Vercel CLI** on your computer by running `npm install -g vercel` in your terminal.
 3.  Navigate to your project's root directory in the terminal and run the command `vercel`.
 4.  Follow the on-screen prompts to link your project and deploy it. Vercel will provide a live URL once finished.
+
+## Features to Implement in the Future
+
+*   **Integrate Text To Speech Server**: Type a word in the input field to hear it pronounced. (Validate its a word)
+*   **Add Animal Sounds**: Add animal sounds to the app for the Animals category.
+
