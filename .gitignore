@@ -9,3 +9,6 @@ assets/script
 assets/images/food
 assets/images/objects
 assets/images/places
+
+# OS
+.DS_Store
