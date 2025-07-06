@@ -53,7 +53,7 @@ function initApp() {
 
 function createCategoryButtons() {
     // Define categories to hide. Easy to update in the future.
-    const hiddenCategories = ['places', 'objects'];
+    const hiddenCategories = ['food', 'places', 'objects'];
     const categories = Object.keys(allData).filter(c => !hiddenCategories.includes(c));
     const categorySelector = document.querySelector('.category-selector');
     categorySelector.innerHTML = ''; // Clear existing buttons
@@ -233,20 +233,32 @@ function navigateNext() {
 
 function playSound() {
     const item = allData[currentCategory][currentIndex];
-    // Simple speech for now. Animal sounds can be added later.
-    speak(item.letter, () => speak(item.word));
+    if (!item) return;
+
+    const letterAudioSrc = `assets/speech/letters/${item.letter}.wav`;
+    const sanitizedWord = item.word.replace(/ /g, '_');
+    const wordAudioSrc = `assets/speech/words/${sanitizedWord}.wav`;
+
+    // Play the letter sound first, then play the word sound as a callback.
+    playAudio(letterAudioSrc, () => playAudio(wordAudioSrc));
 }
 
-function speak(text, onEndCallback) {
-    if (!text) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
+function playAudio(src, onEndCallback) {
+    if (!src) return;
+
+    const audio = new Audio(src);
+
+    audio.onerror = () => {
+        console.error(`Error loading audio: ${src}`);
+        // If there's a callback, call it even on error to not break the chain.
+        if (onEndCallback) onEndCallback();
+    };
+
     if (onEndCallback) {
-        utterance.onend = onEndCallback;
+        audio.onended = onEndCallback;
     }
-    speechSynthesis.speak(utterance);
+
+    audio.play().catch(e => console.error(`Error playing audio: ${e}`));
 }
 
 // --- INITIALIZATION ---
