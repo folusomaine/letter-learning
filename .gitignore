@@ -1,0 +1,15 @@
+
+# Housekeeping
+code-rules.md
+ui-prompt.md
+plan.md
+assets/script
+
+# Future release
+assets/images/food
+assets/images/objects
+assets/images/places
+
+# OS
+.DS_Store
+**/.DS_Store
