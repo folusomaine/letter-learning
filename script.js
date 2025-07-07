@@ -235,13 +235,8 @@ function playSound() {
     const item = allData[currentCategory][currentIndex];
     if (!item) return;
 
-    // TODO: reference audio files from assets-local.json
-    // Sanitize the word and convert to lowercase to create a valid filename.
-    const sanitizedWord = item.word.replace(/ /g, '_').toLowerCase();
-    const letter = item.letter;
-
-    const letterAudioSrc = `assets/speech/letters/${letter}.wav`;
-    const wordAudioSrc = `assets/speech/words/${sanitizedWord}.wav`;
+    const letterAudioSrc = item.letter_speech;
+    const wordAudioSrc = item.word_speech;
 
     // Play the letter sound first, then play the word sound as a callback.
     playAudio(letterAudioSrc, () => playAudio(wordAudioSrc));

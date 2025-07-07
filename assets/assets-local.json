@@ -3,132 +3,184 @@
         {
             "letter": "A",
             "word": "Ant",
-            "image": "assets/images/animals/A/ant.jpg"
+            "image": "assets/images/animals/A/ant.jpg",
+            "letter_speech": "assets/speech/letters/A.wav",
+            "word_speech": "assets/speech/words/animals/ant.wav"
         },
         {
             "letter": "B",
             "word": "Bear",
-            "image": "assets/images/animals/B/bear.avif"
+            "image": "assets/images/animals/B/bear.avif",
+            "letter_speech": "assets/speech/letters/B.wav",
+            "word_speech": "assets/speech/words/animals/bear.wav"
         },
         {
             "letter": "C",
             "word": "Cow",
-            "image": "assets/images/animals/C/cow.jpg"
+            "image": "assets/images/animals/C/cow.jpg",
+            "letter_speech": "assets/speech/letters/C.wav",
+            "word_speech": "assets/speech/words/animals/cow.wav"
         },
         {
             "letter": "D",
             "word": "Dog",
-            "image": "assets/images/animals/D/dog.avif"
+            "image": "assets/images/animals/D/dog.avif",
+            "letter_speech": "assets/speech/letters/D.wav",
+            "word_speech": "assets/speech/words/animals/dog.wav"
         },
         {
             "letter": "E",
             "word": "Elephant",
-            "image": "assets/images/animals/E/elephant.avif"
+            "image": "assets/images/animals/E/elephant.avif",
+            "letter_speech": "assets/speech/letters/E.wav",
+            "word_speech": "assets/speech/words/animals/elephant.wav"
         },
         {
             "letter": "F",
             "word": "Fox",
-            "image": "assets/images/animals/F/fox.jpg"
+            "image": "assets/images/animals/F/fox.jpg",
+            "letter_speech": "assets/speech/letters/F.wav",
+            "word_speech": "assets/speech/words/animals/fox.wav"
         },
         {
             "letter": "G",
             "word": "Giraffe",
-            "image": "assets/images/animals/G/giraffe.jpg"
+            "image": "assets/images/animals/G/giraffe.jpg",
+            "letter_speech": "assets/speech/letters/G.wav",
+            "word_speech": "assets/speech/words/animals/giraffe.wav"
         },
         {
             "letter": "H",
             "word": "Horse",
-            "image": "assets/images/animals/H/horse.jpg"
+            "image": "assets/images/animals/H/horse.jpg",
+            "letter_speech": "assets/speech/letters/H.wav",
+            "word_speech": "assets/speech/words/animals/horse.wav"
         },
         {
             "letter": "I",
             "word": "Impala",
-            "image": "assets/images/animals/I/impala.jpg"
+            "image": "assets/images/animals/I/impala.jpg",
+            "letter_speech": "assets/speech/letters/I.wav",
+            "word_speech": "assets/speech/words/animals/impala.wav"
         },
         {
             "letter": "J",
             "word": "Jelly Fish",
-            "image": "assets/images/animals/J/jellyfish.jpg"
+            "image": "assets/images/animals/J/jellyfish.jpg",
+            "letter_speech": "assets/speech/letters/J.wav",
+            "word_speech": "assets/speech/words/animals/jelly_fish.wav"
         },
         {
             "letter": "K",
             "word": "Kangaroo",
-            "image": "assets/images/animals/K/kangaroo.jpg"
+            "image": "assets/images/animals/K/kangaroo.jpg",
+            "letter_speech": "assets/speech/letters/K.wav",
+            "word_speech": "assets/speech/words/animals/kangaroo.wav"
         },
         {
             "letter": "L",
             "word": "Lion",
-            "image": "assets/images/animals/L/lion.avif"
+            "image": "assets/images/animals/L/lion.avif",
+            "letter_speech": "assets/speech/letters/L.wav",
+            "word_speech": "assets/speech/words/animals/lion.wav"
         },
         {
             "letter": "M",
             "word": "Monkey",
-            "image": "assets/images/animals/M/monkey.avif"
+            "image": "assets/images/animals/M/monkey.avif",
+            "letter_speech": "assets/speech/letters/M.wav",
+            "word_speech": "assets/speech/words/animals/monkey.wav"
         },
         {
             "letter": "N",
             "word": "Narwhal",
-            "image": "assets/images/animals/N/narwhal.jpg"
+            "image": "assets/images/animals/N/narwhal.jpg",
+            "letter_speech": "assets/speech/letters/N.wav",
+            "word_speech": "assets/speech/words/animals/narwhal.wav"
         },
         {
             "letter": "O",
             "word": "Owl",
-            "image": "assets/images/animals/O/owl.jpg"
+            "image": "assets/images/animals/O/owl.jpg",
+            "letter_speech": "assets/speech/letters/O.wav",
+            "word_speech": "assets/speech/words/animals/owl.wav"
         },
         {
             "letter": "P",
             "word": "Penguin",
-            "image": "assets/images/animals/P/penguin.jpg"
+            "image": "assets/images/animals/P/penguin.jpg",
+            "letter_speech": "assets/speech/letters/P.wav",
+            "word_speech": "assets/speech/words/animals/penguin.wav"
         },
         {
             "letter": "Q",
             "word": "Quail",
-            "image": "assets/images/animals/Q/quail.jpg"
+            "image": "assets/images/animals/Q/quail.jpg",
+            "letter_speech": "assets/speech/letters/Q.wav",
+            "word_speech": "assets/speech/words/animals/quail.wav"
         },
         {
             "letter": "R",
             "word": "Rabbit",
-            "image": "assets/images/animals/R/rabbit.avif"
+            "image": "assets/images/animals/R/rabbit.avif",
+            "letter_speech": "assets/speech/letters/R.wav",
+            "word_speech": "assets/speech/words/animals/rabbit.wav"
         },
         {
             "letter": "S",
             "word": "Squirrel",
-            "image": "assets/images/animals/S/squirrel.jpg"
+            "image": "assets/images/animals/S/squirrel.jpg",
+            "letter_speech": "assets/speech/letters/S.wav",
+            "word_speech": "assets/speech/words/animals/squirrel.wav"
         },
         {
             "letter": "T",
             "word": "Tiger",
-            "image": "assets/images/animals/T/tiger.jpg"
+            "image": "assets/images/animals/T/tiger.jpg",
+            "letter_speech": "assets/speech/letters/T.wav",
+            "word_speech": "assets/speech/words/animals/tiger.wav"
         },
         {
             "letter": "U",
             "word": "Urchin",
-            "image": "assets/images/animals/U/urchin.jpg"
+            "image": "assets/images/animals/U/urchin.jpg",
+            "letter_speech": "assets/speech/letters/U.wav",
+            "word_speech": "assets/speech/words/animals/urchin.wav"
         },
         {
             "letter": "V",
             "word": "Vulture",
-            "image": "assets/images/animals/V/vulture.jpg"
+            "image": "assets/images/animals/V/vulture.jpg",
+            "letter_speech": "assets/speech/letters/V.wav",
+            "word_speech": "assets/speech/words/animals/vulture.wav"
         },
         {
             "letter": "W",
             "word": "Wolf",
-            "image": "assets/images/animals/W/wolf.jpg"
+            "image": "assets/images/animals/W/wolf.jpg",
+            "letter_speech": "assets/speech/letters/W.wav",
+            "word_speech": "assets/speech/words/animals/wolf.wav"
         },
         {
             "letter": "X",
             "word": "X-Ray Fish",
-            "image": "assets/images/animals/X/xray_fish.jpg"
+            "image": "assets/images/animals/X/xray_fish.jpg",
+            "letter_speech": "assets/speech/letters/X.wav",
+            "word_speech": "assets/speech/words/animals/x-ray_fish.wav"
         },
         {
             "letter": "Y",
             "word": "Yak",
-            "image": "assets/images/animals/Y/yak.jpg"
+            "image": "assets/images/animals/Y/yak.jpg",
+            "letter_speech": "assets/speech/letters/Y.wav",
+            "word_speech": "assets/speech/words/animals/yak.wav"
         },
         {
             "letter": "Z",
             "word": "Zebra",
-            "image": "assets/images/animals/Z/zebra.jpg"
+            "image": "assets/images/animals/Z/zebra.jpg",
+            "letter_speech": "assets/speech/letters/Z.wav",
+            "word_speech": "assets/speech/words/animals/zebra.wav"
         }
     ],
     "food": [
