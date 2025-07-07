@@ -19,7 +19,7 @@ A simple and interactive web application designed to help children learn the alp
 *   **Status**: The "Animal Sound" button appears in the modal for the 'Animals' category but is currently disabled.
 *   **Dependencies**: This feature requires audio files for each animal. The file paths will need to be added to `assets-local.json` and the playback logic implemented in `script.js`.
 
-### Additional Categories (Places & Objects)
+### Additional Categories (Food, Places & Objects)
 
 *   **Status**: The data for 'Places' and 'Objects' exists in `assets.json`, but these categories are hidden from the UI to keep the experience focused.
 *   **How to Enable**: To show these categories, you can remove them from the `hiddenCategories` array in `script.js`:
